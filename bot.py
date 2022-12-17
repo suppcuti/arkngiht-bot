@@ -203,14 +203,10 @@ def startGame():
     print("Tiep Tuc")
     sleep(15)
     loop = True
-    while loop:
-        click(x,y)
-        if pyautogui.locateCenterOnScreen("start.png",confidence=0.7):
-            x, y = pyautogui.locateCenterOnScreen("start.png",confidence=0.7)
-            pyautogui.click(x,y)
-            sleep(25)
-            print("Hoan Thanh Mo Game")
-            break
+    x, y = pyautogui.locateCenterOnScreen("start.png",confidence=0.7)
+    pyautogui.click(x,y)
+    sleep(25)
+    print("Hoan Thanh Mo Game")
     main()
 
 def basedaily():
@@ -220,7 +216,7 @@ def basedaily():
         x, y = pyautogui.locateCenterOnScreen("base.png",grayscale=True,confidence=0.8)
         pyautogui.click(x,y)
         sleep(5)
-    sleep(5)
+    sleep(6.5)
     x, y = pyautogui.locateCenterOnScreen("basenofi.png",confidence=0.75)
     sleep(1)
     pyautogui.click(x,y)
@@ -284,6 +280,19 @@ def single_tag(n):
 def filler():
     print("--------------- Start Fillter Tag ---------------")
     if single_tag("tag_top.png") == True :
+        print("-----------x------------x------------")
+        print("-------------x--------x--------------")
+        print("---------------TOP TAG---------------")
+        print("-------------x--------x--------------")
+        print("------------x-----------x------------")
+
+        return True
+    if single_tag("tag_top2.png") == True :
+        print("-----------x------------x------------")
+        print("-------------x--------x--------------")
+        print("---------------TOP TAG---------------")
+        print("-------------x--------x--------------")
+        print("------------x-----------x------------")        
         return True
     if single_tag("tag_senior.png") == True :
         return True
@@ -453,6 +462,14 @@ def farm():
     press('o')
     sleep(3)
     keyboard.press_and_release("Shift + A")
+
+def done_farm():
+    while keyboard.is_pressed('q') == False:
+        if pyautogui.locateCenterOnScreen('out1.png',confidence=0.9,grayscale=True):
+            sleep(1)
+            keyboard.press_and_release("Ctrl + Shift + U")
+            break
+    main(),sleep(2),clickimg('misson.png',0.8,2),press('x')
 
 def find_dorm():
     sleep(3)
@@ -663,9 +680,21 @@ def slave_factory_exp():
 def slave_trader():
     if refill_savle("trader1.png","trader2.png","trader3.png") != False:
         return
+    if refill_savle("traderx1.png","traderx2.png","traderx3.png") != False:
+        return
     if refill_savle("trader4.png","trader5.png","trader6.png") != False:
         return
     if refill_savle("traderr1.png","traderr2.png","traderr3.png") != False:
+        return
+
+def slave_off():
+    if refill_savle2("off1.png") != False:
+        return
+    if refill_savle2("off2.png") != False:
+        return
+    if refill_savle2("off3.png") != False:
+        return
+    if refill_savle2("off4.png") != False:
         return
 
 def slave_eletric():    
@@ -708,6 +737,11 @@ def phanbiet_factory():
 
     darging2(250)
     sleep(0.5)
+    if pyautogui.locateCenterOnScreen("office_empty.png",grayscale=True,confidence=0.8):
+        x,y = pyautogui.locateCenterOnScreen("office_empty.png",grayscale=True,confidence=0.8)
+        x= x +100
+        pyautogui.click(x,y)
+        sleep(2),slave_off(),sleep(2)
     darging2(200)#Tang 3
     sleep(0.5)
     if pyautogui.locateCenterOnScreen("slave_factory-empty.png",grayscale=True,confidence=0.8):
@@ -726,7 +760,24 @@ def cc(img):
         print(slave)
     print(count)
     return count
-bot(),bot()
-# slave_factory_vang()
-# tag = input()
-# cc(tag+".png")
+
+
+cmd = input()
+if cmd == "recruit":
+    recruit()
+if cmd == "slave_e":
+    slave_factory_exp()
+if cmd == "slave_g":
+    slave_factory_vang()
+if cmd == "slave_t":
+    slave_trader()
+if cmd == "slave_ele":
+    slave_eletric()
+if cmd == "pb":
+    phanbiet_factory()
+if cmd == "bot":
+    bot(),bot(),done_farm(),done_farm()
+if cmd == "farm":
+    farm()
+
+

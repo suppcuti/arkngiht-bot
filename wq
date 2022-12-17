@@ -1,0 +1,26 @@
+"nice quality of life and tag update"
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# On branch main
+# Your branch is up to date with 'origin/main'.
+#
+# Changes to be committed:
+#	modified:   bot.py
+#	new file:   collect_all.png
+#	modified:   het_sanity.png
+#	new file:   misson.png
+#	new file:   off1.png
+#	new file:   off2.png
+#	new file:   off3.png
+#	new file:   off4.png
+#	new file:   office_empty.png
+#	new file:   out1.png
+#	modified:   tag_top.png
+#	new file:   tag_top2.png
+#	new file:   traderx1.png
+#	new file:   traderx2.png
+#	new file:   traderx3.png
+#
+"nice"
+:wq
