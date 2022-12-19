@@ -163,7 +163,7 @@ def clickimg(img,confiden,t):
 
 def hire_tag(*args):
     for i in args:
-        if i == "tag_sp.png" and pyautogui.locateCenterOnScreen("tag_sp.png",grayscale=True,confidence=0.96) == None:
+        if i == "tag_supporter.png" and pyautogui.locateCenterOnScreen("tag_supporter.png",grayscale=True,confidence=0.96) == None:
             return
         if pyautogui.locateCenterOnScreen(i,grayscale=True,confidence=0.9):
             continue
@@ -171,7 +171,7 @@ def hire_tag(*args):
             return
     
     for i in args:
-        if i == "tag_sp.png":
+        if i == "tag_supporter.png":
             x,y=pyautogui.locateCenterOnScreen(i,grayscale=True,confidence=0.96)
             pyautogui.click(x,y)
             print(i)
@@ -198,14 +198,22 @@ def startGame():
     x, y = pyautogui.locateCenterOnScreen("icon.png",grayscale=True,confidence=0.7)
     pyautogui.click(x,y)
     print("Mo Icon")
-    sleep(25)
+    sleep(20)
     click(x,y)
     print("Tiep Tuc")
     sleep(15)
-    loop = True
-    x, y = pyautogui.locateCenterOnScreen("start.png",confidence=0.7)
-    pyautogui.click(x,y)
-    sleep(25)
+    i=0
+    if pyautogui.locateCenterOnScreen("start.png",confidence=0.7) != True:
+        while i < 5 :
+            i = i+1
+            sleep(5)
+            pyautogui.click()
+            if pyautogui.locateCenterOnScreen("start.png",confidence=0.7):
+                clickimg('start.png',0.7,1)
+                break
+    if pyautogui.locateCenterOnScreen("start.png",confidence=0.7):
+        clickimg('start.png',0.7,1)
+    sleep(15)
     print("Hoan Thanh Mo Game")
     main()
 
@@ -268,7 +276,13 @@ def recruit():
             press('o')
             sleep(1)
         sleep(3)
-    main()
+    while pyautogui.locateCenterOnScreen("main.png",confidence=0.8) != ImageNotFoundException  :
+        sleep(1)
+        press('esc')
+        pyautogui.click()
+        sleep(1)   
+        if pyautogui.locateCenterOnScreen("main.png",confidence=0.75):
+            break
 
 def single_tag(n):
     if  pyautogui.locateCenterOnScreen(n,grayscale=True,confidence=0.8):
@@ -280,19 +294,19 @@ def single_tag(n):
 def filler():
     print("--------------- Start Fillter Tag ---------------")
     if single_tag("tag_top.png") == True :
-        print("-----------x------------x------------")
-        print("-------------x--------x--------------")
-        print("---------------TOP TAG---------------")
-        print("-------------x--------x--------------")
-        print("------------x-----------x------------")
+        print("===========x============x============")
+        print("=============x========x==============")
+        print("===============TOP TAG===============")
+        print("=============x========x==============")
+        print("============x===========x============")
 
         return True
     if single_tag("tag_top2.png") == True :
-        print("-----------x------------x------------")
-        print("-------------x--------x--------------")
-        print("---------------TOP TAG---------------")
-        print("-------------x--------x--------------")
-        print("------------x-----------x------------")        
+        print("===========x============x============")
+        print("=============x========x==============")
+        print("===============TOP TAG===============")
+        print("=============x========x==============")
+        print("============x===========x============")        
         return True
     if single_tag("tag_senior.png") == True :
         return True
@@ -466,10 +480,11 @@ def farm():
 def done_farm():
     while keyboard.is_pressed('q') == False:
         if pyautogui.locateCenterOnScreen('out1.png',confidence=0.9,grayscale=True):
+            clickimg("out1.png",0.8,1)
             sleep(1)
             keyboard.press_and_release("Ctrl + Shift + U")
             break
-    main(),sleep(2),clickimg('misson.png',0.8,2),press('x')
+    main(),sleep(2),clickimg('misson.png',0.8,5),clickimg('collect_all.png',0.8,1),main()
 
 def find_dorm():
     sleep(3)
@@ -510,11 +525,11 @@ def slave():
 
 def slave_re():
     counts = 0
-    count = countimg("slave_die.png")
+    count = countimg("test2.png")
     sleep(0.9)
     press('g')
     sleep(0.5)
-    for slave in pyautogui.locateAllOnScreen('slave_die.png',grayscale=True, confidence=0.96):
+    for slave in pyautogui.locateAllOnScreen('test2.png',grayscale=True, confidence=0.9):
         sleep(0.1)
         counts= counts +1
         x,y = pyautogui.center(slave)
@@ -534,12 +549,19 @@ def slave_re():
 
 def countimg(img):
     count = 0
-    for slave in pyautogui.locateAllOnScreen(img,grayscale=False , confidence=0.96):
+    for slave in pyautogui.locateAllOnScreen(img,grayscale=True , confidence=0.9):
         count= count +1
         print(slave)
     print(count)
     return count
 
+def countimg2(img):
+    count = 0
+    for slave in pyautogui.locateAllOnScreen(img,grayscale=False , confidence=0.96):
+        count= count +1
+        print(slave)
+    print(count)
+    return count
 def slave_re2():
     count = 0
     for slave in pyautogui.locateAllOnScreen('slave_die.png', confidence=0.96):
@@ -654,6 +676,8 @@ def slave_factory_vang():
         return
     if refill_savle("all_slave4.png","all_slave5.png","all_slave6.png") != False:
         return
+    if refill_savle("all_slave7.png","all_slave8.png","all_slave9.png") != False:
+        return
     if refill_savle("basic1.png","basic2.png","basic3.png") != False:
         return
     if refill_savle("basic4.png","basic5.png","basic6.png") != False:
@@ -670,6 +694,8 @@ def slave_factory_exp():
         return
     if refill_savle("all_slave4.png","all_slave5.png","all_slave6.png") != False:
         return
+    if refill_savle("all_slave7.png","all_slave8.png","all_slave9.png") != False:
+        return
     if refill_savle("basic1.png","basic2.png","basic3.png") != False:
         return
     if refill_savle("basic4.png","basic5.png","basic6.png") != False:
@@ -680,12 +706,15 @@ def slave_factory_exp():
 def slave_trader():
     if refill_savle("trader1.png","trader2.png","trader3.png") != False:
         return
-    if refill_savle("traderx1.png","traderx2.png","traderx3.png") != False:
+    if refill_savle("trader1-1.png","trader1-2.png","trader1-3.png") != False:
         return
     if refill_savle("trader4.png","trader5.png","trader6.png") != False:
         return
     if refill_savle("traderr1.png","traderr2.png","traderr3.png") != False:
         return
+    if pyautogui.locateCenterOnScreen('trade1.png',confidence=0.8,grayscale=True):
+        clickimg('trade1.png',0.8,1),press('s'),sleep(2),clickimg('trade2.png',0.8,0.1),clickimg('trade3.png',0.8,0.1),press('k')
+    return
 
 def slave_off():
     if refill_savle2("off1.png") != False:
@@ -761,8 +790,9 @@ def cc(img):
     print(count)
     return count
 
-
 cmd = input()
+if cmd == "start":
+    startGame()
 if cmd == "recruit":
     recruit()
 if cmd == "slave_e":
@@ -779,5 +809,14 @@ if cmd == "bot":
     bot(),bot(),done_farm(),done_farm()
 if cmd == "farm":
     farm()
+if cmd == "base":
+    basedaily()
+if cmd == "slave_re":
+    slave_re()
+if cmd == "d_farm":
+    done_farm(),done_farm()
+if cmd == "countimg":
+    tag=input()
+    countimg2(tag)
 
 
